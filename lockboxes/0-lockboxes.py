@@ -10,18 +10,8 @@ More informations:
 - Return True if all boxes can be opened, else return False
 """
 
+
 def canUnlockAll(boxes):
-    """
-    Details:
-    Write a method that determines if all the boxes can be opened
-    Arguments:
-    boxes --> List of Lists, it contains the boxes with keys
-    Return boolean
-    Variables:
-    queue --> List, Store the number keys to open boxes
-    key --> integer, key of the myKeys
-    box --> integer, key inside of an specific box
-    """
     n = len(boxes)  # Number of boxes
 
     # To track which boxes have been visited
