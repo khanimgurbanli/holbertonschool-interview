@@ -1,68 +1,44 @@
 #!/usr/bin/python3
-""" defines method to solve lockboxes problem """
+"""
+You have n number of locked boxes in front of you.
+and each box may contain keys to the other boxes
 
+More informations:
+- Prototype: def canUnlockAll(boxes)
+- A key with the same number as a box opens that box
+- You can assume all keys will be positive integers
+- Return True if all boxes can be opened, else return False
+"""
 
 def canUnlockAll(boxes):
     """
-    determines if all boxes can be unlocked
-
-    parameters:
-        boxes (list): list of list representing boxes and any keys inside
-            There are n number of boxes, labeled sequentially starting at 0.
-            Keys with the same number as a box opens that box.
-            All keys can be assumed to be positive integers.
-            There can be boxes without keys and keys without boxes.
-            The first box boxes[0] is the only unlocked box initially.
-
-    returns:
-        True, if all boxes can be unlocked
-        False, if one or more boxes cannot be unlocked
+    Details:
+    Write a method that determines if all the boxes can be opened
+    Arguments:
+    boxes --> List of Lists, it contains the boxes with keys
+    Return boolean
+    Variables:
+    queue --> List, Store the number keys to open boxes
+    key --> integer, key of the myKeys
+    box --> integer, key inside of an specific box
     """
-    from copy import deepcopy
+    n = len(boxes)  # Number of boxes
 
-    # checks if given valid list of boxes
-    if type(boxes) is not list or len(boxes) < 1:
-        return False
-    # checks that all boxes contain a valid list of keys (empty boxes are OK)
-    # keys can be assumed to be positive integers, type will be confirmed later
-    for box in boxes:
-        if type(box) is not list:
-            return False
-    # creates a copy of boxes to not affect the original list of lists
-    copyBoxes = deepcopy(boxes)
-    # creates list of available keys (only contains 0 initially)
-    keys_list = [0]
-    # while there are still available keys:
-    while len(keys_list) > 0:
-        # the current key will be the first available key
-        key = keys_list[0]
-        # keys_list will reset to remove used key
-        keys_list = keys_list[1:]
-        # checks if given valid key
-        if type(key) is not int or key < 0:
-            return False
-        # mark that the box has been opened by appeneding a -1 flag
-        # since all keys are pos ints, -1 will not be mistaken for a valid key
-        copyBoxes[key].append(-1)
-        # loop through any new keys found in the recently opened box
-        # save new keys to keys_list to potentially open more boxes
-        for new_key in copyBoxes[key]:
-            if new_key is -1:
-                # if new key is -1 flag to marks as opened, continue
-                continue
-            if new_key >= len(copyBoxes):
-                # if new key is out of range of the available boxes, continue
-                continue
-            if -1 in copyBoxes[new_key] or new_key in keys_list:
-                # if box previously been opened or key already known, continue
-                continue
-            # update the list of availble key
-            keys_list.append(new_key)
-    # after opening all possible boxes, check that total boxes have been opened
-    # opened boxes are noted with a -1 flag
-    for box in copyBoxes:
-        if -1 not in box:
-            # if a box is missing the -1 flag, it was not unlocked
-            return False
-    # returns true if all boxes in the previous loop were indicated as unlocked
-    return True
+    # To track which boxes have been visited
+    visited = [False] * n  #  mean is  visited = [False, False, False]
+    visited[0] = True  #  mean is  visited = [True, False, False]
+
+    # Queue for Breadth-First Search (BFS)
+    queue = [0]  # Start with the first box
+
+    # Breadth-First Search (BFS)
+    while queue:
+        current = queue.pop(0)  # Get the next box to process
+
+        # Check each key in the current box
+        for box in boxes[current]:
+            if box < n and not visited[box]:  # Check if box index is valid
+                visited[box] = True  # Mark it as visited
+                queue.append(box)  # Add it to the queue for next exploration
+
+    return all(visited)
