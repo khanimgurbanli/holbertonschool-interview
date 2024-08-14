@@ -1,7 +1,7 @@
 
 # Holberton Task - Python - holbertonschool-interview
 
-![copy-repo-link](../images/holberton_logo.jpg)
+![copy-repo-link](./images/holberton_logo.jpg)
            
 
 ## Description
