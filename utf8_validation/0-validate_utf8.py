@@ -12,7 +12,7 @@ def validUTF8(data):
     parameters:
         data [list of ints]:
             each integer represents 1 byte of data
-            data set can contain multiple characters
+            set can contain multiple characters
             each character in UTF-8 can be 1 to 4 bytes long
 
     returns:
@@ -24,3 +24,5 @@ def validUTF8(data):
         if type(i) is not int:
             return False
     return True
+
+ 
