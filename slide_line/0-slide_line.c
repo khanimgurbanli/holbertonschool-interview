@@ -74,4 +74,3 @@ int slide_left(int* line, size_t size)
 		line[i] = 0;
 	return (1);
 }
- 
