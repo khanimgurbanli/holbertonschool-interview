@@ -30,6 +30,7 @@ void merge_sort(int *array, size_t size)
  * @holder: temp array to hold information during merge
  */
 
+
 void merge_sort_holder(int *array, size_t size, int *holder)
 {
 	int mid = size / 2;
