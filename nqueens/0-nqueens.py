@@ -9,7 +9,7 @@ class NQueen:
     def __init__(self, n):
         """ Constructor """
         self.n = n
-        self.x = [0 for i in range(n + 1)]
+        self.x = [0 for _ in range(n + 1)]
         self.res = []
 
     def place(self, k, i):
@@ -30,8 +30,8 @@ class NQueen:
                 self.x[k] = i
                 if k == self.n:
                     solution = []
-                    for i in range(1, self.n + 1):
-                        solution.append([i - 1, self.x[i] - 1])
+                    for j in range(1, self.n + 1):
+                        solution.append([j - 1, self.x[j] - 1])
                     self.res.append(solution)
                 else:
                     self.nQueen(k + 1)
